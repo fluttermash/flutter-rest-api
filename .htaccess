@@ -1,0 +1,18 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteRule ^robots.txt - [L]
+
+
+RewriteCond %{REQUEST_URI} !@^/flutter-rest-api/frontend/web/(assets|css|js|images|fonts|datatest)/ 
+#RewriteCond %{REQUEST_URI} /frontend/web/(assets|css)/ 
+RewriteRule ^assets/(.*)$ frontend/web/assets/$1 [L]
+RewriteRule ^css/(.*)$ frontend/web/css/$1 [L]
+RewriteRule ^js/(.*)$ frontend/web/js/$1 [L]
+
+RewriteCond %{REQUEST_URI} !^/(frontend|backend)/web/(assets|css)/ 
+RewriteCond %{REQUEST_URI} !index.php
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ frontend/web/index.php
+
+php_flag display_errors 1
